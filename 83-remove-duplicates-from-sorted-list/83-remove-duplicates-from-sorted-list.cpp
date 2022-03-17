@@ -20,7 +20,6 @@ public:
                 t1->next = t2;
                 t1= t1->next;
                 t2 = t2->next;
-                // t1 = t2;
             }
         }
         if(t1->next) t1->next = NULL;
