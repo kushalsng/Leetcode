@@ -15,7 +15,6 @@ public:
         if(!root) return x;
         inorder(root->left, x);
         x.push_back(root->val);
-        // cout<<x.back()->val<<" ";
         inorder(root->right, x);
         return x;
     }
@@ -24,13 +23,10 @@ public:
         x = inorder(root, x);
         root->val = x.front();
         x.pop_front();
-        // root->right = new TreeNode(-1);
         TreeNode* ptr = root;
-        // cout<<"x.size() = "<<x.size()<<endl;
         while(!x.empty()){
             ptr->left = NULL;
             ptr->right = new TreeNode(x.front());
-            // cout<< x.front()<< " ";
             x.pop_front();
             ptr = ptr->right;
         }
