@@ -18,16 +18,23 @@ public:
         bool toggle = false;
         q.push(root);
         while(!q.empty()){
+            stack<TreeNode*> s;
             int cnt = q.size();
             vector<int> v;
             for(int i=0; i<cnt; i++){
                 TreeNode* ptr = q.front();
                 q.pop();
-                v.push_back(ptr->val);
+                if(toggle)s.push(ptr);
+                else v.push_back(ptr->val);
                 if(ptr->left) q.push(ptr->left);
                 if(ptr->right) q.push(ptr->right);
             }
-            if(toggle) reverse(v.begin(),v.end());
+            if(toggle){
+                while(!s.empty()){
+                    v.push_back(s.top()->val);
+                    s.pop();
+                }
+            }
             toggle = !toggle;
             ans.push_back(v);
         }
