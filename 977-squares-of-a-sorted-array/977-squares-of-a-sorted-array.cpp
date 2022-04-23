@@ -1,18 +1,12 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        map<int,int> mp;
-        for(auto x: nums){
-            mp[abs(x)]++;
-        }
-        auto it = mp.begin();
-        for(int i=0;i<nums.size();){
-            while(it != mp.end()){
-                while(it->second--){
-                    nums[i++] = it->first * it->first;
-                }
-                it++;
-            }
+        priority_queue<int, vector<int>, greater<int>> pq;
+        for(auto x: nums)pq.push(x*x);
+        int i=0;
+        while(!pq.empty()){
+            nums[i++] = pq.top();
+            pq.pop();
         }
         return nums;
     }
