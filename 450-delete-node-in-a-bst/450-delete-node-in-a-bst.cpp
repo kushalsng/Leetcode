@@ -31,8 +31,8 @@ public:
             }
             return;
         }
-        del(root->left,key,root);
-        del(root->right,key,root);
+        if(root->val > key)del(root->left,key,root);
+        else del(root->right,key,root);
     }
     TreeNode* deleteNode(TreeNode* root, int key) {
         del(root,key,NULL);
