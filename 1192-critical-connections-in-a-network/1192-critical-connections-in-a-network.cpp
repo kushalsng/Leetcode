@@ -27,11 +27,14 @@ public:
         }
         vis[0] = 1;
         low[0] = in[0] = timer++;
-        for(auto x: adj[0]){
-            if(!vis[x]){
-                dfs(x,0,ans,vis,adj,low,in,timer);
-                if(low[x] > in[0]){
-                    ans.push_back({x,0});
+        for(auto node: adj[0]){
+            if(vis[node]){
+                low[0] = min(low[0], in[node]);
+            }else{
+                dfs(node,0, ans,vis,adj, low,in,timer);
+                low[0] = min(low[0], low[node]);
+                if(low[node] > in[0]){
+                    ans.push_back({0,node});
                 }
             }
         }
