@@ -10,26 +10,6 @@
  */
 class Solution {
 public:
-//     ListNode* logic(ListNode* head, int l, int r, int c, vector<int> v, bool isPushed){
-//         ListNode* temp = head;
-        
-//         while(c<l){
-//             temp = temp->next;
-//             c++;
-//         }
-//         while(c<=right){
-//             if(isPushed){
-//             temp->val = v[v.size()-1];
-//             v.pop_back();
-//             }else {
-//                  v.push_back(temp->val);
-//             }
-//             temp = temp->next;
-//              c++; 
-//         }
-        
-//         return head;
-//     }
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         vector<int> v;
         ListNode* temp = head;
