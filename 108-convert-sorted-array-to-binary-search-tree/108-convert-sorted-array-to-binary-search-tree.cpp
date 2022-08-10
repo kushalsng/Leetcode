@@ -17,7 +17,6 @@ public:
         ll mid = (l+r)/2;
         TreeNode* nw = new TreeNode(nums[mid]);
         root = nw;
-        // cout<<root->val<<endl;
         root->left = fun(root->left, l, mid-1, nums);
         root-> right = fun(root->right, mid+1, r, nums);
         return root;
