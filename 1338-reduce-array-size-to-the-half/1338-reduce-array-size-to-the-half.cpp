@@ -4,15 +4,16 @@ public:
         int n = arr.size();
         unordered_map<int,int> mp;
         for(auto x: arr)mp[x]++;
-        priority_queue<int> pq;
+        vector<int>pq;
         for(auto it = mp.begin(); it != mp.end(); it++){
-            pq.push(it->second);
+            pq.push_back(it->second);
         }
+        sort(pq.begin(),pq.end());
         int m = n;
         int ans=0;
         while(m>n/2){
-            m -= pq.top();
-            pq.pop();
+            m -= pq.back();
+            pq.pop_back();
             ans++;
         }
         return ans;
