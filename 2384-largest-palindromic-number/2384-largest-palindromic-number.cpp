@@ -4,11 +4,8 @@ public:
         map<char,int>mp;
         for(auto c: num)mp[c]++;
         if(mp.size() == 1 && num[0] == '0') return "0";
-        int odd = -1;
-        for(auto it = mp.begin(); it != mp.end(); it++){
-            if(it->second%2)
-                odd = max(odd, it->second);
-        }
+        
+        
         char c = (char)0;
         // if(odd != -1){
             for(auto it = mp.begin(); it != mp.end(); it++){
