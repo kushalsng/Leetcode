@@ -5,13 +5,10 @@ public:
         for(auto c: num)mp[c]++;
         if(mp.size() == 1 && num[0] == '0') return "0";
         
-        
-        char c = (char)0;
-        // if(odd != -1){
-            for(auto it = mp.begin(); it != mp.end(); it++){
-                if(it->second == 1) c = max(c,it->first);
-            }
-        // }
+        char c = 0;
+        for(auto it = mp.begin(); it != mp.end(); it++){
+            if(it->second == 1) c = max(c,it->first);
+        }
         string ans = "";
         for(auto it = mp.rbegin(); it != mp.rend(); it++){
                 if(it->second %2 == 0){
