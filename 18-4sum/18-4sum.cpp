@@ -13,8 +13,7 @@ public:
                     long long sum = (long long)nums[i]+nums[j]+nums[k]+nums[l];
                     if(sum == target){
                         vector<int> v{nums[i],nums[j],nums[k],nums[l]};
-                        auto it = s.find(v);
-                        if(it == s.end())s.insert(v);
+                        s.insert(v);
                         k++,l--;
                     }else if(sum < target)k++;
                     else l--;
