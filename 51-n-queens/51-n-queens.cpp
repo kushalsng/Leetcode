@@ -1,19 +1,12 @@
 class Solution {
 public:
-    bool isSafe(int row, int col, vector<string> board, int n,vector<int>&cols,vector<int>&up,vector<int>&low){
-        int drow = row, dcol = col;
-        if(cols[row] == 1)return false;
-        if(low[row+col] == 1) return false;
-        if(up[n-1+col-row] == 1)return false;
-        return true;
-    }
     void solve(int col, vector<string> &board, vector<vector<string>> &ans,int n,vector<int>&cols,vector<int>&up,vector<int>&low){
         if(col == n){
             ans.push_back(board);
             return;
         }
         for(int row = 0; row<n; row++){
-            if(isSafe(row,col,board,n,cols,up,low)){
+            if(!cols[row] && !low[row +col] && !up[n-1+col-row]){
                 board[row][col] = 'Q';
                 cols[row] =1;
                 up[n-1+col-row] = 1;
