@@ -1,31 +1,17 @@
 class Solution {
 public:
     vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
-        int m =mat.size(), n = mat[0].size();
-        for(int k=n-1; k>=0; k--){
-            vector<int> v;
-            int i=0,j=k;
-            while(i<m && j<n){
-                v.push_back(mat[i++][j++]);
-            }
-            sort(v.begin(),v.end());
-            i=0,j=k;
-            int ind=0;
-            while(i<m && j<n && ind<v.size()){
-                mat[i++][j++] = v[ind++];
+        unordered_map<int,priority_queue<int, vector<int>, greater<int>>> mp;
+        int m = mat.size(), n= mat[0].size();
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                mp[i-j].push(mat[i][j]);
             }
         }
-        for(int k=1; k<m; k++){
-            vector<int> v;
-            int i=k,j=0;
-            while(i<m && j<n){
-                v.push_back(mat[i++][j++]);
-            }
-            sort(v.begin(),v.end());
-            i=k,j=0;
-            int ind=0;
-            while(i<m && j<n && ind<v.size()){
-                mat[i++][j++] = v[ind++];
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                mat[i][j] = mp[i-j].top();
+                mp[i-j].pop();
             }
         }
         return mat;
