@@ -10,68 +10,32 @@
  */
 class Solution {
 public:
-    ListNode* mergeSortedList(ListNode* headA, ListNode* headB){
-    if(!headA && !headB);
-    if(!headA) return headB;
-    if(!headB) return headA;
-    ListNode* i = headA, *j = headB;
-    ListNode* prev = NULL;
-    ListNode* next = i->next;
-    
-    while(j){
-        if(i->val < j->val){
-            while(i->next){
-                if(i->next->val <= j->val){
-                    prev = i; i = i->next; next = i->next;
-                }else break;
-            }
-        }
-
-        if(j->val <= i->val){
-            if(i == headA){
-                headB = headB->next;
-                j->next = i;
-                headA = j;
-                prev = j;
-                j = headB;
-                next = i->next;
-            } else {
-                prev->next = j;
-                headB = headB->next;
-                j->next = i;
-                prev = prev->next;
-                j = headB;
-            }
-        } else {
-            i->next = j;
-            headB = headB->next;
-            j->next = next;
-            prev = i;
-            i = j;
-            next = i->next;
-            j = headB;
-        }
-    }
-    return headA;
-}
-
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        int s1 =0, s2=0; 
-        ListNode* temp = list1;
-        while(temp){
-            // cout<<temp->val<<" ";
-            temp = temp->next;
-            s1++;
+        if(!list1)return list2;
+        if(!list2)return list1;
+        ListNode* a = list1, *b = list2, *head, *tail;
+        head = (a->val < b->val) ? list1 : list2;
+        tail = (a->val < b->val) ? list1 : list2;
+        
+        head == a ? a = a->next : b = b->next;
+        
+        while(a && b){
+            if(a->val < b->val){
+                tail->next = a;
+                tail = tail->next;
+                a = a->next;
+            }else{
+                tail->next = b;
+                tail = tail->next;
+                b = b->next;
+            }
         }
-        // cout<<endl;
-        temp = list2;
-        while(temp){
-            // cout<<temp->val<<" ";
-            temp = temp->next;
-            s2++;
+        if(a){
+            tail->next = a;
         }
-        // cout<<endl;
-        // ListNode* res = NULL;
-        return s1 >= s2 ? mergeSortedList(list1,list2) : mergeSortedList(list2,list1);
+        if(b){
+            tail->next = b;
+        }
+        return head;
     }
 };
