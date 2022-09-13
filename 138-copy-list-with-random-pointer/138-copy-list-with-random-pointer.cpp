@@ -16,34 +16,16 @@ public:
 
 class Solution {
 public:
-    Node* copyRandomList(Node* head1) {
-        if(!head1) return head1;
-        Node* head2 = new Node(head1->val);
-        Node* t1 = head1->next, *t2 = head2;
-        while(t1){
-            Node* n = new Node(t1->val);
-            t2->next = n;
-            t1=t1->next;
-            t2 = t2->next;
+    Node* copyRandomList(Node* head) {
+        unordered_map<Node*,Node*> mp;
+        for(Node* temp = head; temp; temp = temp->next){
+            mp[temp] = new Node(temp->val);
         }
-
-        t1= head1, t2 = head2;
-        int c=0;
-
-        while(t1 && t2){
-            c=0;
-            Node* t = head1;
-            while(t != t1->random){
-                c++;
-                t = t->next;
-            }
-            t= head2;
-            while(c--) t = t->next;
-            t2->random = t;
-
-            t1=t1->next;
-            t2 = t2->next;
+        for(Node* temp = head; temp; temp = temp->next){
+            Node* clone = mp[temp];
+            clone->next = mp[temp->next];
+            clone->random = mp[temp->random];
         }
-        return head2;
+        return mp[head];
     }
 };
