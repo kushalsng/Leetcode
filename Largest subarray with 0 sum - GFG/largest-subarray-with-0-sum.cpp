@@ -12,19 +12,16 @@ class Solution{
     public:
     int maxLen(vector<int>&nums, int n)
     {   
-        vector<int> pfx(n);
         unordered_map<int,int> mp;
-        int ans =0;
+        int ans =0, sum=0;
         for(int i=0; i<n; i++){
-            if(i==0)pfx[i] = nums[i];
-            else pfx[i] = pfx[i-1] + nums[i];
-            if(pfx[i] == 0)ans = max(ans, i+1);
-        }
-        for(int i=0; i<n; i++){
-            if(mp.count(pfx[i])){
-                ans = max(ans, i - mp[pfx[i]]);
+            sum += nums[i];
+            if(sum == 0){
+                ans = i+1;
+            }else if(mp.count(sum)){
+                ans = max(ans, i - mp[sum]);
             } else {
-                mp[pfx[i]] = i;
+                mp[sum] = i;
             }
         }
         return ans;
